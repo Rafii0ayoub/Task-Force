@@ -1,0 +1,159 @@
+body { 
+    display: flex; /* Utilisation de flexbox pour le layout */
+    flex-direction: column; /* Les éléments sont disposés en colonne */
+    min-height: 100vh; /* Assure que le corps prend toute la hauteur de la fenêtre */
+    margin: 0; /* Enlève les marges par défaut */
+    font-family: Arial, sans-serif; /* Police de la page */
+}
+
+/* Style pour le header */
+header {
+    background-color: #004d00; /* Vert foncé */
+    color: white; /* Couleur du texte en blanc pour le contraste */
+    padding: 20px; /* Espacement intérieur */
+    text-align: center; /* Centre le texte */
+}
+
+/* Style pour le conteneur principal */
+.container {
+    display: flex; /* Utilisation de flexbox pour le contenu principal */
+    flex: 1; /* Prend tout l'espace restant */
+}
+
+/* Style pour le menu de navigation à gauche */
+nav {
+    width: 200px; /* Largeur fixe pour le menu */
+    background-color: #9adbbe; /* Couleur de fond pistache clair */
+    padding: 15px; /* Espacement intérieur */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Ombre pour le menu */
+}
+
+/* Style pour les liens du menu */
+nav a {
+    display: block; /* Chaque lien occupe toute la largeur */
+    padding: 10px; /* Espacement intérieur des liens */
+    color: #333; /* Couleur du texte */
+    text-decoration: none; /* Pas de soulignement */
+    margin: 5px 1; /* Marges entre les liens */
+    border-radius: 4px; /* Coins arrondis */
+}
+
+/* Style pour les liens au survol */
+nav a:hover {
+    background-color: #44bdbd; /* Couleur légèrement différente au survol */
+}
+
+/* Style pour le contenu principal */
+main {
+    flex: 1; /* Prendre le reste de l'espace disponible */
+    padding: 20px; /* Espacement intérieur du contenu principal */
+    background-color: #d1e7dd; /* Vert pour le contenu principal */
+    color: rgb(19, 12, 12); /* Couleur du texte en blanc pour le contraste */
+    display: flex; /* Utilisation de flexbox pour le contenu principal */
+    flex-direction: column; /* Les éléments sont disposés en colonne */
+}
+
+/* Style pour la section d'articles */
+#articles {
+    background-image: url('path/to/your/background-image.jpg'); /* Remplacez par le chemin de votre image */
+    background-size: cover; /* Couvre toute la section */
+    background-position: center; /* Centre l'image */
+    padding: 15px; /* Espacement intérieur */
+    border-radius: 8px; /* Coins arrondis pour un meilleur aspect visuel */
+}
+
+/* Style pour les boîtes d'articles */
+.article-box {
+    background-color: rgba(255, 255, 255, 0.8); /* Fond blanc transparent pour chaque boîte */
+    color: black; /* Couleur du texte en noir pour le contraste */
+    padding: 15px; /* Espacement intérieur */
+    margin: 10px 0; /* Marge entre les boîtes */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre pour donner un effet de profondeur */
+    transition: transform 0.3s; /* Transition pour l'effet de déroulement */
+}
+
+/* Effet de déroulement des boîtes */
+.article-box:hover {
+    transform: translateY(-5px); /* Déplace légèrement la boîte vers le haut au survol */
+}
+
+/* Style pour la liste des sénateurs et députés */
+aside {
+    width: 200px; /* Largeur fixe pour la liste */
+    background-color: #96d4b8; /* Couleur de fond pistache clair */
+    padding: 15px; /* Espacement intérieur */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Ombre pour la liste */
+}
+
+/* Style pour le pied de page */
+footer {
+    background-color: #87bba3; /* Vert foncé */
+    color: rgb(0, 0, 0); /* Couleur du texte en blanc pour le contraste */
+    text-align: center; /* Centrer le texte */
+    padding: 10px; /* Espacement intérieur */
+    position: relative; /* Pour le positionnement */
+    bottom: 0; /* Coller en bas */
+    width: 100%; /* Largeur complète */
+}
+
+/* Ajout de style pour le conteneur de contenu principal */
+.content {
+    display: flex; /* Utilisation de flexbox pour le contenu principal */
+    flex: 1; /* Prend tout l'espace restant */
+    margin: 20px; /* Marges autour du contenu */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+thead tr {
+    background-color: #063606; /* Vert foncé pour l'en-tête */
+    color: white; /* Texte en blanc */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #c2f0c2; /* Vert pistache pour les lignes impaires */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #a6e0a6; /* Vert pistache foncé pour les lignes paires */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #21491f;
+}
+
+th {
+    background-color: #2b5944; /* Pistache clair pour les en-têtes */
+}
+
+tr:hover {
+    background-color: #2d5432; /* Couleur au survol des lignes */
+}
+
+#lois {
+    margin: 20px 0;
+}
+
+.loi-box {
+    background-color: #f5f5f5;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 4px solid #4CAF50; /* Bordure verte pour le visuel */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loi-box h3 {
+    margin: 0 0 10px 0;
+}
+
+.loi-box p {
+    margin: 0;
+    color: #555;
+}

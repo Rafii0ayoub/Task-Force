@@ -1,0 +1,63 @@
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Think Tank</title>
+</head>
+<body>
+    <header>
+        <h1>Bienvenue dans le Think Tank</h1>
+    </header>
+    
+    <div class="container">
+        <nav class="menu">
+            <h2>Menu</h2>
+            <a href="{{ url_for('index') }}">Acceuil</a>
+            <a href="{{ url_for('add_contact') }}">Ajouter un Contact</a>
+            <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
+            <a href="{{ url_for('generate_bill') }}">Générer un Projet de Loi</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </nav>
+
+        <main class="content">
+            <section id="articles">
+                <h2>Articles</h2>
+                <p>Voici quelques articles intéressants sur la transition énergétique et la législation :</p>
+                <div class="article-box">
+                    <h3><a href="https://www.exemple.com/article1">Article 1: Comprendre la transition énergétique</a></h3>
+                    <p>Un aperçu des enjeux liés à la transition énergétique.</p>
+                </div>
+                <div class="article-box">
+                    <h3><a href="https://www.exemple.com/article2">Article 2: Le rôle des législateurs dans la transition énergétique</a></h3>
+                    <p>Comment les législateurs peuvent aider à la transition énergétique.</p>
+                </div>
+                <div class="article-box">
+                    <h3><a href="https://www.exemple.com/article3">Article 3: Innovations législatives pour un avenir durable</a></h3>
+                    <p>Des exemples d'innovations législatives pour la durabilité.</p>
+                </div>
+            </section>
+        </main>
+
+        <aside class="contacts">
+            <h2>Sénateurs et Députés</h2>
+            <ul>
+                <li><a href="{{ url_for('view_contacts', id=1) }}">Louis Dupont</a></li>
+                <li><a href="{{ url_for('view_contacts', id=3) }}">Pierre Martin</a></li>
+                <li><a href="{{ url_for('view_contacts', id=4) }}">Sophie Durand</a></li>
+                <li><a href="{{ url_for('view_contacts', id=5) }}">Lucas Moreau</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Think Tank. Tous droits réservés.</p>
+        <p>Contactez-nous : <a href="mailto:contact@thinktank.com">contact@thinktank.com</a></p>
+        <p>Suivez-nous sur 
+            <a href="https://twitter.com/thinktank">Twitter</a> | 
+            <a href="https://linkedin.com/company/thinktank">LinkedIn</a>
+        </p>
+    </footer>
+</body>
+</html>

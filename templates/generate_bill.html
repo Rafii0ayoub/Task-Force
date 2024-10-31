@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Générer un Projet de Loi</title>
+</head>
+<body>
+    <header>
+        <h1>Générer un Projet de Loi</h1>
+    </header>
+
+    <div class="container">
+        <nav class="menu">
+            <h2>Menu</h2>
+            <a href="{{ url_for('index') }}">Acceuil</a>
+            <a href="{{ url_for('add_contact') }}">Ajouter un Contact</a>
+            <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
+            <a href="{{ url_for('generate_bill') }}">Générer un Projet de Loi</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </nav>
+        <main>
+            <section>
+            <form method="POST">
+                <label for="theme">Thème du Projet de Loi :</label>
+                <input type="text" id="theme" name="theme" required>
+                <button type="submit">Générer</button>
+            </form>
+
+            {% if projet_de_loi %}
+            <h2>Projet de Loi Généré :</h2>
+            <pre>{{ projet_de_loi }}</pre>
+            <a href="{{ url_for('index') }}">Retour</a>
+            {% endif %}
+            </section>
+
+            <section id="lois">
+                <h2>Textes de Loi</h2>
+                <p>Voici quelques textes de lois importants sur la transition énergétique et la législation :</p>
+            
+                <div class="loi-box">
+                    <h3><a href="https://www.exemple.com/loi1">Loi n°1 : Loi sur la Transition Énergétique pour la Croissance Verte</a></h3>
+                    <p>Cette loi vise à réduire les émissions de gaz à effet de serre et à promouvoir les énergies renouvelables, fixant des objectifs ambitieux pour la France en matière de durabilité.</p>
+                </div>
+            
+                <div class="loi-box">
+                    <h3><a href="https://www.exemple.com/loi2">Loi n°2 : Loi relative à la lutte contre le gaspillage et à l'économie circulaire</a></h3>
+                    <p>Cette loi encourage une économie circulaire en visant à réduire les déchets et à améliorer le recyclage, incluant des mesures pour une gestion durable des ressources.</p>
+                </div>
+            
+                <div class="loi-box">
+                    <h3><a href="https://www.exemple.com/loi3">Loi n°3 : Loi sur l'Énergie et le Climat</a></h3>
+                    <p>Une loi adoptée pour répondre aux urgences climatiques et écologiques, fixant des objectifs de neutralité carbone et renforçant les actions contre le réchauffement climatique.</p>
+                </div>
+            </section>
+        </main>
+        <aside class="contacts">
+            <h2>Sénateurs et Députés</h2>
+            <ul>
+                <li><a href="{{ url_for('view_contacts', id=1) }}">Louis Dupont</a></li>
+                <li><a href="{{ url_for('view_contacts', id=3) }}">Pierre Martin</a></li>
+                <li><a href="{{ url_for('view_contacts', id=4) }}">Sophie Durand</a></li>
+                <li><a href="{{ url_for('view_contacts', id=5) }}">Lucas Moreau</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Think Tank. Tous droits réservés.</p>
+        <p>Contactez-nous : <a href="mailto:contact@thinktank.com">contact@thinktank.com</a></p>
+        <p>Suivez-nous sur 
+            <a href="https://twitter.com/thinktank">Twitter</a> | 
+            <a href="https://linkedin.com/company/thinktank">LinkedIn</a>
+        </p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Voir les Contacts</title>
+</head>
+<body>
+    <header>
+        <h1>Liste des Contacts</h1>
+    </header>
+
+    <div class="container">
+        <nav class="menu">
+            <h2>Menu</h2>
+            <a href="{{ url_for('index') }}">Accueil</a>
+            <a href="{{ url_for('add_contact') }}">Ajouter un Contact</a>
+            <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
+            <a href="{{ url_for('generate_bill') }}">Générer un Projet de Loi</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </nav>
+
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Identifiant</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Région</th>
+                        <th>Département</th>
+                        <th>Numéro de Circonscription</th>
+                        <th>Profession</th>
+                        <th>Groupe Politique Complet</th>
+                        <th>Groupe Politique Abrégé</th>
+                        <th>Email</th>
+                        <th>Gestion RDV</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in deputes %}
+                    <tr>
+                        <td>{{ contact[0] }}</td>
+                        <td>{{ contact[1] }}</td>
+                        <td>{{ contact[2] }}</td>
+                        <td>{{ contact[3] }}</td>
+                        <td>{{ contact[4] }}</td>
+                        <td>{{ contact[5] }}</td>
+                        <td>{{ contact[6] }}</td>
+                        <td>{{ contact[7] }}</td>
+                        <td>{{ contact[8] }}</td>
+                        <td><a href="mailto:{{ contact[9] }}">{{ contact[9] }}</a></td>
+                        <td><a href="{{ url_for('depute_detail',depute_id=contact[0]) }}"> RDV</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ url_for('index') }}">Retour</a>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Think Tank. Tous droits réservés.</p>
+        <p>Contactez-nous : <a href="mailto:contact@thinktank.com">contact@thinktank.com</a></p>
+        <p>Suivez-nous sur 
+            <a href="https://twitter.com/thinktank">Twitter</a> | 
+            <a href="https://linkedin.com/company/thinktank">LinkedIn</a>
+        </p>
+    </footer>
+</body>
+</html>

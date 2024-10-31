@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Détails du Député</title>
+</head>
+<body>
+    <header>
+        <h1>Détails de {{ depute[2] }} {{ depute[1] }}</h1> <!-- Assuming index 1 is first name and index 2 is last name -->
+    </header>
+
+    <div class="container">
+        <h2>Informations du Député</h2>
+        <ul>
+            <li>ID: {{ depute[0] }}</li>
+            <li>Prénom: {{ depute[1] }}</li>
+            <li>Nom: {{ depute[2] }}</li>
+            <li>Email: <a href="mailto:{{ depute[3] }}">{{ depute[3] }}</a></li> <!-- Assuming index 3 is email -->
+            <li>Région: {{ depute[4] }}</li>
+        </ul>
+
+        <h2>Journal des Échanges</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type d'Échange</th>
+                    <th>Détails</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exchange in exchanges %}
+                <tr>
+                    <td>{{ exchange[1] }}</td> <!-- Assuming index 1 is date -->
+                    <td>{{ exchange[3] }}</td> <!-- Assuming index 3 is type_echange -->
+                    <td>{{ exchange[4] }}</td> <!-- Assuming index 4 is details -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ url_for('view_contacts') }}">Retour</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Think Tank. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

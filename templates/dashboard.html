@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Tableau de Bord</h1>
+    </header>
+
+    <div class="container">
+        <nav class="menu">
+            <h2>Menu</h2>
+            <a href="{{ url_for('index') }}">Accueil</a>
+            <a href="{{ url_for('add_contact') }}">Ajouter un Contact</a>
+            <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
+            <a href="{{ url_for('generate_bill') }}">Générer un Projet de Loi</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </nav>
+
+        <main>
+            <section class="kpi">
+                <h2>Indicateurs Clés</h2>
+                <div class="kpi-cards">
+                    <div class="card">
+                        <h3>Total des Députés</h3>
+                        <p>{{ total_deputes }}</p>
+                    </div>
+                    <div class="card">
+                        <h3>Nombre de Projets de Loi</h3>
+                        <p>{{ total_lois }}</p>
+                    </div>
+                    <div class="card">
+                        <h3>Nombre d'Échanges</h3>
+                        <p>{{ total_echanges }}</p>
+                    </div>
+                    <div class="card">
+                        <h3>Rendez-vous Pris</h3>
+                        <p>{{ total_rdv }}</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tableau-region">
+                <h2>Répartition des Députés par Région</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Région</th>
+                            <th>Nombre de Députés</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for region, count in deputes_par_region %}
+                        <tr>
+                            <td>{{ region }}</td>
+                            <td>{{ count }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="tableau-lois">
+                <h2>Projets de Loi Récents</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Titre du Projet de Loi</th>
+                            <th>Date</th>
+                            <th>Député Proposant</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for loi in lois_recents %}
+                        <tr>
+                            <td>{{ loi[0] }}</td>
+                            <td>{{ loi[1] }}</td>
+                            <td>{{ loi[2] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Think Tank. Tous droits réservés.</p>
+        <p>Contactez-nous : <a href="mailto:contact@thinktank.com">contact@thinktank.com</a></p>
+        <p>Suivez-nous sur 
+            <a href="https://twitter.com/thinktank">Twitter</a> | 
+            <a href="https://linkedin.com/company/thinktank">LinkedIn</a>
+        </p>
+    </footer>
+</body>
+</html>
