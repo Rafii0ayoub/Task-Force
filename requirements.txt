@@ -44,6 +44,7 @@ fastjsonschema==2.20.0
 filelock==3.14.0
 Flask==2.3.2
 Flask-Login==0.6.2  
+Flask-Dance==6.2.0
 flatbuffers==24.3.25
 folium==0.17.0
 fonttools==4.53.1
