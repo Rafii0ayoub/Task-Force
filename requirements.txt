@@ -176,5 +176,4 @@ python-multipart==0.0.9
 python-pptx==0.6.23
 pytweening==1.2.0
 pytz==2023.3  # Adjusted version
-pywin32==306  # Adjusted version to a compatible one
 PyYAML==6.
