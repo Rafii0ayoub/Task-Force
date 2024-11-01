@@ -183,7 +183,6 @@ smmap==5.0.0
 soupsieve==2.4.1
 SQLAlchemy==2.0.18
 sqlparse==0.4.4
-sse-starlette==1.13.0
 streamlit==1.24.0
 texttable==1.6.7
 tqdm==4.65.0
