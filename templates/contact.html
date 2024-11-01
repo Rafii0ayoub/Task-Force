@@ -17,7 +17,7 @@
             <a href="{{ url_for('index') }}">principal</a>
             <a href="{{ url_for('add_contact') }}">Ajouter un Contact</a>
             <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
-            <a href="{{ url_for('generate_bill') }}">Générer un Projet de Loi</a>
+            <a href="{{ url_for('generate_bill') }}">Projet de Loi</a>
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
         </nav>
 
@@ -62,15 +62,6 @@
             </ul>
         </main>
     </div>
-    <aside class="contacts">
-        <h2>Sénateurs et Députés</h2>
-        <ul>
-            <li><a href="{{ url_for('view_contacts', id=1) }}">Louis Dupont</a></li>
-            <li><a href="{{ url_for('view_contacts', id=3) }}">Pierre Martin</a></li>
-            <li><a href="{{ url_for('view_contacts', id=4) }}">Sophie Durand</a></li>
-            <li><a href="{{ url_for('view_contacts', id=5) }}">Lucas Moreau</a></li>
-        </ul>
-    </aside>
 
     <footer>
         <p>&copy; 2024 Think Tank. Tous droits réservés.</p>

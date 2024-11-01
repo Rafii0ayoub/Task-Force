@@ -3,7 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Global reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Background and layout styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f4f8; /* Light blue-grey background */
+            color: #2c3e50; /* Dark blue-grey text */
+        }
+
+        header {
+            background-color: #2c3e50; /* Dark blue-grey header */
+            color: #ffffff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Menu styling */
+        .menu {
+            width: 200px;
+            background-color: #ecf0f1; /* Light grey background */
+            padding: 1rem;
+        }
+
+        .menu h2 {
+            font-size: 18px;
+            color: #2c3e50; /* Dark blue-grey */
+            margin-bottom: 1rem;
+        }
+
+        .menu a {
+            display: block;
+            margin: 0.5rem 0;
+            color: #2980b9; /* Blue links */
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content styling */
+        main {
+            flex: 1;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 1rem;
+        }
+
+        /* Statistics section */
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            background-color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            flex: 1;
+            margin: 0 0.5rem;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #bdc3c7; /* Light grey border */
+            text-align: left;
+        }
+
+        th {
+            background-color: #2980b9; /* Blue header for table */
+            color: #ffffff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #ecf0f1; /* Light grey for even rows */
+        }
+
+        tbody tr:hover {
+            background-color: #bdc3c7; /* Light blue-grey hover for rows */
+        }
+
+        table h2 {
+            color: #2c3e50; /* Dark blue-grey */
+            font-size: 18px;
+            margin-bottom: 1rem;
+        }
+
+        /* Styling for links in table */
+        table a {
+            color: #2980b9; /* Blue for links */
+            text-decoration: none;
+        }
+
+        table a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer styling */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #2c3e50; /* Dark blue-grey footer */
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer a {
+            color: #3498db; /* Lighter blue for footer links */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Voir les Contacts</title>
 </head>
 <body>
@@ -17,11 +165,32 @@
             <a href="{{ url_for('index') }}">Accueil</a>
             <a href="{{ url_for('add_contact') }}">Ajouter un Contact</a>
             <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
-            <a href="{{ url_for('generate_bill') }}">Générer un Projet de Loi</a>
+            <a href="{{ url_for('generate_bill') }}">Projet de Loi</a>
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
         </nav>
 
         <main>
+            <div class="stats">
+                <div class="stat">
+                    <h2>Total des Députés</h2>
+                    <p id="total-deputes">0</p>
+                </div>
+                <div class="stat">
+                    <h2>Total des Départements</h2>
+                    <p id="total-departements">0</p>
+                </div>
+                <div class="stat">
+                    <h2>Total des Partis</h2>
+                    <p id="total-partis">0</p>
+                </div>
+                <div class="stat">
+                    <h2>Députés Actifs</h2>
+                    <p id="total-actifs">0</p>
+                </div>
+            </div>
+
+            <canvas id="deputesChart" width="400" height="200"></canvas>
+
             <table>
                 <thead>
                     <tr>
@@ -51,7 +220,7 @@
                         <td>{{ contact[7] }}</td>
                         <td>{{ contact[8] }}</td>
                         <td><a href="mailto:{{ contact[9] }}">{{ contact[9] }}</a></td>
-                        <td><a href="{{ url_for('depute_detail',depute_id=contact[0]) }}"> RDV</a></td>
+                        <td><a href="{{ url_for('depute_detail', depute_id=contact[0]) }}"> RDV</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -68,5 +237,72 @@
             <a href="https://linkedin.com/company/thinktank">LinkedIn</a>
         </p>
     </footer>
+
+    <script>
+        // Add markers for each deputy from the deputes data
+        const deputesData = JSON.parse('{{ deputes | tojson | safe }}');   // Flask variable passed to JavaScript
+    
+        // Calcul des statistiques
+        const totalDeputes = deputesData.length;
+        const totalDepartements = new Set(deputesData.map(depute => depute[4])).size; // Nombre de départements uniques
+        const totalPartis = new Set(deputesData.map(depute => depute[7])).size; // Nombre de partis uniques
+        const totalActifs = deputesData.filter(depute => depute[6] === 'Actif').length; // Comptage des députés actifs
+    
+        // Affichage des statistiques dans le HTML
+        document.getElementById('total-deputes').innerText = totalDeputes;
+        document.getElementById('total-departements').innerText = totalDepartements;
+        document.getElementById('total-partis').innerText = totalPartis;
+        document.getElementById('total-actifs').innerText = totalActifs;
+    
+        // Extraction des données pour le graphique
+        const parties = {};
+        deputesData.forEach(depute => {
+            const party = depute[7]; // Supposons que le parti est à l'index 7
+            if (parties[party]) {
+                parties[party]++;
+            } else {
+                parties[party] = 1;
+            }
+        });
+    
+        // Préparation des données pour le graphique
+        const labels = Object.keys(parties);
+        const data = Object.values(parties);
+    
+        // Création du graphique
+        const ctx = document.getElementById('deputesChart').getContext('2d');
+        const deputesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Nombre de députés par parti',
+                    data: data,
+                    backgroundColor: '#2980b9',
+                    borderColor: '#1a5276',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Nombre de députés'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Parti'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    
 </body>
 </html>

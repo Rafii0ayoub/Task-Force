@@ -3,8 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Générer un Projet de Loi</title>
+    <style>
+        /* Global reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Background and layout styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f4f8; /* Light blue-grey background */
+            color: #2c3e50; /* Dark blue-grey text */
+        }
+
+        header {
+            background-color: #2c3e50; /* Dark blue-grey header */
+            color: #ffffff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            margin: 1rem;
+            gap: 20px; /* Added gap for spacing */
+        }
+
+        /* Menu styling */
+        .menu {
+            width: 200px;
+            background-color: #ecf0f1; /* Light grey background */
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .menu h2 {
+            font-size: 18px;
+            color: #2c3e50; /* Dark blue-grey */
+            margin-bottom: 1rem;
+        }
+
+        .menu a {
+            display: block;
+            margin: 0.5rem 0;
+            color: #2980b9; /* Blue links */
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content styling */
+        main {
+            flex: 1;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2980b9; /* Blue */
+            margin-bottom: 1rem;
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #2980b9; /* Blue button */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3498db; /* Lighter blue on hover */
+        }
+
+        /* Styling for the generated law section */
+        .generated-law-box {
+            background-color: #e8ffe8;
+            border-left: 5px solid #2980b9; /* Blue left border */
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        /* Styling for laws boxes */
+        .loi-box {
+            background-color: #ecf0f1; /* Light grey */
+            border: 1px solid #bdc3c7; /* Grey border */
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }
+
+        .loi-box:hover {
+            transform: scale(1.02); /* Slightly enlarge on hover */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Shadow on hover */
+        }
+
+        .loi-box h3 {
+            margin-bottom: 10px;
+        }
+
+        .loi-box a {
+            color: #2980b9; /* Blue for law links */
+            text-decoration: none;
+        }
+
+        .loi-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer styling */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #2c3e50; /* Dark blue-grey footer */
+            color: #ffffff;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer a {
+            color: #3498db; /* Lighter blue for footer links */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -14,55 +175,55 @@
     <div class="container">
         <nav class="menu">
             <h2>Menu</h2>
-            <a href="{{ url_for('index') }}">Acceuil</a>
+            <a href="{{ url_for('index') }}">Accueil</a>
             <a href="{{ url_for('add_contact') }}">Ajouter un Contact</a>
             <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
-            <a href="{{ url_for('generate_bill') }}">Générer un Projet de Loi</a>
+            <a href="{{ url_for('generate_bill') }}">Projet de Loi</a>
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
         </nav>
+
         <main>
             <section>
-            <form method="POST">
-                <label for="theme">Thème du Projet de Loi :</label>
-                <input type="text" id="theme" name="theme" required>
-                <button type="submit">Générer</button>
-            </form>
+                <form method="POST">
+                    <label for="theme">Thème du Projet de Loi :</label>
+                    <input type="text" id="theme" name="theme" required>
+                    <button type="submit">Générer</button>
+                </form>
 
-            {% if projet_de_loi %}
-            <h2>Projet de Loi Généré :</h2>
-            <pre>{{ projet_de_loi }}</pre>
-            <a href="{{ url_for('index') }}">Retour</a>
-            {% endif %}
+                {% if projet_de_loi %}
+                <section class="generated-law">
+                    <h2>Projet de Loi Généré :</h2>
+                    <div class="generated-law-box">
+                        <pre>{{ projet_de_loi }}</pre>
+                    </div>
+                    <a href="{{ url_for('index') }}">Retour</a>
+                </section>
+                {% endif %}
             </section>
 
             <section id="lois">
                 <h2>Textes de Loi</h2>
                 <p>Voici quelques textes de lois importants sur la transition énergétique et la législation :</p>
-            
+                
                 <div class="loi-box">
                     <h3><a href="https://www.exemple.com/loi1">Loi n°1 : Loi sur la Transition Énergétique pour la Croissance Verte</a></h3>
                     <p>Cette loi vise à réduire les émissions de gaz à effet de serre et à promouvoir les énergies renouvelables, fixant des objectifs ambitieux pour la France en matière de durabilité.</p>
                 </div>
-            
+                
                 <div class="loi-box">
                     <h3><a href="https://www.exemple.com/loi2">Loi n°2 : Loi relative à la lutte contre le gaspillage et à l'économie circulaire</a></h3>
                     <p>Cette loi encourage une économie circulaire en visant à réduire les déchets et à améliorer le recyclage, incluant des mesures pour une gestion durable des ressources.</p>
                 </div>
-            
+                
                 <div class="loi-box">
                     <h3><a href="https://www.exemple.com/loi3">Loi n°3 : Loi sur l'Énergie et le Climat</a></h3>
                     <p>Une loi adoptée pour répondre aux urgences climatiques et écologiques, fixant des objectifs de neutralité carbone et renforçant les actions contre le réchauffement climatique.</p>
                 </div>
             </section>
         </main>
+
         <aside class="contacts">
-            <h2>Sénateurs et Députés</h2>
-            <ul>
-                <li><a href="{{ url_for('view_contacts', id=1) }}">Louis Dupont</a></li>
-                <li><a href="{{ url_for('view_contacts', id=3) }}">Pierre Martin</a></li>
-                <li><a href="{{ url_for('view_contacts', id=4) }}">Sophie Durand</a></li>
-                <li><a href="{{ url_for('view_contacts', id=5) }}">Lucas Moreau</a></li>
-            </ul>
+            <!-- Contacts can be added here if needed -->
         </aside>
     </div>
 

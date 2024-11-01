@@ -1,4 +1,11 @@
-body { 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
     display: flex; /* Utilisation de flexbox pour le layout */
     flex-direction: column; /* Les éléments sont disposés en colonne */
     min-height: 100vh; /* Assure que le corps prend toute la hauteur de la fenêtre */
@@ -18,6 +25,7 @@ header {
 .container {
     display: flex; /* Utilisation de flexbox pour le contenu principal */
     flex: 1; /* Prend tout l'espace restant */
+    margin: 20px; /* Marges autour du contenu */
 }
 
 /* Style pour le menu de navigation à gauche */
@@ -48,7 +56,7 @@ main {
     flex: 1; /* Prendre le reste de l'espace disponible */
     padding: 20px; /* Espacement intérieur du contenu principal */
     background-color: #d1e7dd; /* Vert pour le contenu principal */
-    color: rgb(19, 12, 12); /* Couleur du texte en blanc pour le contraste */
+    color: rgb(19, 12, 12); /* Couleur du texte */
     display: flex; /* Utilisation de flexbox pour le contenu principal */
     flex-direction: column; /* Les éléments sont disposés en colonne */
 }
@@ -102,8 +110,11 @@ footer {
     display: flex; /* Utilisation de flexbox pour le contenu principal */
     flex: 1; /* Prend tout l'espace restant */
     margin: 20px; /* Marges autour du contenu */
+    background-color: #f4f4f9; /* Couleur de fond de la section contenu */
+    border-radius: 8px; /* Coins arrondis */
 }
 
+/* Table styles */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -126,7 +137,7 @@ tbody tr:nth-child(even) {
 th, td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #21491f;
+    border-bottom: 1px solid #21491f; /* Bordure pour les cellules */
 }
 
 th {
@@ -142,18 +153,18 @@ tr:hover {
 }
 
 .loi-box {
-    background-color: #f5f5f5;
-    padding: 15px;
-    margin-bottom: 15px;
+    background-color: #f5f5f5; /* Fond gris clair */
+    padding: 15px; /* Espacement intérieur */
+    margin-bottom: 15px; /* Marge en bas */
     border-left: 4px solid #4CAF50; /* Bordure verte pour le visuel */
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Ombre */
 }
 
 .loi-box h3 {
-    margin: 0 0 10px 0;
+    margin: 0 0 10px 0; /* Marges pour le titre */
 }
 
 .loi-box p {
-    margin: 0;
-    color: #555;
+    margin: 0; /* Pas de marge pour le paragraphe */
+    color: #555; /* Couleur du texte pour le paragraphe */
 }

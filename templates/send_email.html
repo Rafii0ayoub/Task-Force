@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f4f8;
+            color: #2c3e50;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 24px;
+        }
+        
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        
+        .menu {
+            width: 200px;
+            background-color: #ecf0f1;
+            padding: 1rem;
+        }
+        
+        .menu h2 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .menu a {
+            display: block;
+            margin: 0.5rem 0;
+            color: #2980b9;
+            text-decoration: none;
+        }
+        
+        .menu a:hover {
+            text-decoration: underline;
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 1rem;
+        }
+
+        /* Styling for the email table */
+        .email-table {
+            margin-top: 2rem;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .email-table th, .email-table td {
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            text-align: left;
+        }
+
+        .email-table th {
+            background-color: #2980b9;
+            color: white;
+        }
+
+        .email-table tbody tr:nth-child(even) {
+            background-color: #ecf0f1;
+        }
+
+        .email-table tbody tr:hover {
+            background-color: #bdc3c7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #2c3e50;
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+        
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <title>Boîte d'Envoi</title>
+</head>
+<body>
+    <header>
+        <h1>Boîte d'Envoi</h1>
+    </header>
+
+    <div class="container">
+        <nav class="menu">
+            <h2>Menu</h2>
+            <a href="#">Accueil</a>
+            <a href="#">Ajouter un Contact</a>
+            <a href="#">Voir les Contacts</a>
+            <a href="#">Projet de Loi</a>
+            <a href="#">Dashboard</a>
+            <a href="#">Boîte d'Envoi</a>
+        </nav>
+
+        <main>
+            <h2>Liste des Emails Envoyés</h2>
+            <table class="email-table">
+                <thead>
+                    <tr>
+                        <th>Sujet</th>
+                        <th>Destinataire</th>
+                        <th>Date d'Envoi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample emails - Add as many rows as needed -->
+                    {% for i in range(1, 51) %}
+                    <tr>
+                        <td>Invitation à la réunion stratégique n°{{ i }}</td>
+                        <td>Député {{ 'Nom' }} {{ i }}</td>
+                        <td>{{ '2024-10-' + ('%02d' % (i % 30 + 1)) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Think Tank. Tous droits réservés.</p>
+        <p>Contactez-nous : <a href="mailto:contact@thinktank.com">contact@thinktank.com</a></p>
+        <p>Suivez-nous sur 
+            <a href="https://twitter.com/thinktank">Twitter</a> | 
+            <a href="https://linkedin.com/company/thinktank">LinkedIn</a>
+        </p>
+    </footer>
+</body>
+</html>

@@ -1,57 +1,239 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Think Tank</title>
+    <style>
+        /* Global reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f4f8; /* Couleur de fond alignée */
+            color: #2c3e50; /* Couleur de texte alignée */
+        }
+
+        header {
+            background-color: #2c3e50; /* Couleur d'en-tête alignée */
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .menu {
+            width: 200px;
+            background-color: #ecf0f1; /* Couleur de fond du menu alignée */
+            padding: 1rem;
+        }
+
+        .menu h2 {
+            font-size: 18px;
+            color: #2c3e50; /* Couleur de titre alignée */
+            margin-bottom: 1rem;
+        }
+
+        .menu a {
+            display: block;
+            margin: 0.5rem 0;
+            color: #2980b9; /* Couleur de lien alignée */
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+
+        main.content {
+            flex: 1;
+            padding: 2rem;
+            background-color: #ffffff; /* Couleur de fond du contenu principal */
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        main h2 {
+            margin-bottom: 1rem;
+            color: #2c3e50; /* Couleur du titre alignée */
+        }
+
+        /* Styles pour les statistiques */
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
+            gap: 1rem; /* Espacement entre les boxes */
+            margin-bottom: 2rem; /* Espace en bas de la section */
+        }
+
+        .statistic {
+            background-color: #ecf0f1; /* Couleur de fond des boîtes */
+            border-radius: 4px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+            transition: transform 0.2s; /* Effet de transition pour l'animation */
+        }
+
+        .statistic:hover {
+            transform: scale(1.05); /* Légère animation au survol */
+        }
+
+        .statistic-title {
+            font-size: 16px;
+            color: #2c3e50; /* Couleur du titre des statistiques */
+            margin-bottom: 0.5rem;
+        }
+
+        .statistic-value {
+            font-weight: bold;
+            font-size: 24px;
+            color: #3498db; /* Couleur des valeurs */
+        }
+
+        /* Styles pour les articles */
+        .article-box {
+            background-color: #ecf0f1; /* Couleur de fond des articles */
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s; /* Effet de transition pour l'animation */
+        }
+
+        .article-box:hover {
+            transform: scale(1.02); /* Légère animation au survol */
+        }
+
+        .article-box h3 {
+            font-size: 16px;
+            color: #2980b9; /* Couleur des titres d'articles */
+        }
+
+        .article-box p {
+            color: #34495e; /* Couleur du texte des articles */
+            margin-top: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #2c3e50; /* Couleur de fond du pied de page alignée */
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer a {
+            color: #3498db; /* Couleur des liens dans le pied de page alignée */
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Bienvenue dans le Think Tank</h1>
+        <h1>Bienvenue dans la task force</h1>
     </header>
     
     <div class="container">
         <nav class="menu">
             <h2>Menu</h2>
-            <a href="{{ url_for('index') }}">Acceuil</a>
+            <a href="{{ url_for('index') }}">Accueil</a>
+            <a href="{{ url_for('send_email') }}">Send Email</a>
             <a href="{{ url_for('add_contact') }}">Ajouter un Contact</a>
             <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
-            <a href="{{ url_for('generate_bill') }}">Générer un Projet de Loi</a>
+            <a href="{{ url_for('generate_bill') }}">Projet de Loi</a>
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
         </nav>
 
         <main class="content">
+            <section class="statistics">
+                <h2>Indicateurs Clés</h2>
+                <div class="statistic">
+                    <div class="statistic-title">Total des Députés :</div>
+                    <div class="statistic-value">575</div>
+                </div>
+                <div class="statistic">
+                    <div class="statistic-title">Nombre de Projets de Loi :</div>
+                    <div class="statistic-value">0</div>
+                </div>
+                <div class="statistic">
+                    <div class="statistic-title">Nombre d'Échanges :</div>
+                    <div class="statistic-value">0</div>
+                </div>
+                <div class="statistic">
+                    <div class="statistic-title">Rendez-vous Pris :</div>
+                    <div class="statistic-value">0</div>
+                </div>
+                <div class="statistic">
+                    <div class="statistic-title">Total des Départements :</div>
+                    <div class="statistic-value">107</div>
+                </div>
+                <div class="statistic">
+                    <div class="statistic-title">Total des Partis :</div>
+                    <div class="statistic-value">12</div>
+                </div>
+                <div class="statistic">
+                    <div class="statistic-title">Députés Actifs :</div>
+                    <div class="statistic-value">0</div>
+                </div>
+                
+            </section>
+
             <section id="articles">
                 <h2>Articles</h2>
-                <p>Voici quelques articles intéressants sur la transition énergétique et la législation :</p>
                 <div class="article-box">
-                    <h3><a href="https://www.exemple.com/article1">Article 1: Comprendre la transition énergétique</a></h3>
+                    <h3><a href="{{ url_for('article_detail', article_id=1) }}">Article 1: Comprendre la transition énergétique</a></h3>
                     <p>Un aperçu des enjeux liés à la transition énergétique.</p>
                 </div>
                 <div class="article-box">
-                    <h3><a href="https://www.exemple.com/article2">Article 2: Le rôle des législateurs dans la transition énergétique</a></h3>
+                    <h3><a href="{{ url_for('article_detail', article_id=2) }}">Article 2: Le rôle des législateurs dans la transition énergétique</a></h3>
                     <p>Comment les législateurs peuvent aider à la transition énergétique.</p>
                 </div>
                 <div class="article-box">
-                    <h3><a href="https://www.exemple.com/article3">Article 3: Innovations législatives pour un avenir durable</a></h3>
+                    <h3><a href="{{ url_for('article_detail', article_id=3) }}">Article 3: Innovations législatives pour un avenir durable</a></h3>
                     <p>Des exemples d'innovations législatives pour la durabilité.</p>
+                </div>
+                <div class="article-box">
+                    <h3><a href="{{ url_for('article_detail', article_id=4) }}">Article 4: Les énergies renouvelables et leur impact</a></h3>
+                    <p>Un examen des énergies renouvelables et de leur rôle dans la réduction des émissions de carbone.</p>
+                </div>
+                <div class="article-box">
+                    <h3><a href="{{ url_for('article_detail', article_id=5) }}">Article 5: La législation climatique en Europe</a></h3>
+                    <p>Analyse des récentes initiatives législatives sur le climat en Europe.</p>
                 </div>
             </section>
         </main>
 
         <aside class="contacts">
-            <h2>Sénateurs et Députés</h2>
-            <ul>
-                <li><a href="{{ url_for('view_contacts', id=1) }}">Louis Dupont</a></li>
-                <li><a href="{{ url_for('view_contacts', id=3) }}">Pierre Martin</a></li>
-                <li><a href="{{ url_for('view_contacts', id=4) }}">Sophie Durand</a></li>
-                <li><a href="{{ url_for('view_contacts', id=5) }}">Lucas Moreau</a></li>
-            </ul>
+            <!-- Contact information could be added here in the future -->
         </aside>
     </div>
 
-    <footer>
+    <footer class="footer">
         <p>&copy; 2024 Think Tank. Tous droits réservés.</p>
         <p>Contactez-nous : <a href="mailto:contact@thinktank.com">contact@thinktank.com</a></p>
         <p>Suivez-nous sur 

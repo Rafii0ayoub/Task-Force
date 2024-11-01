@@ -3,8 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Ajouter un Contact</title>
+    <style>
+        /* Global reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f4f8; /* Couleur de fond alignée avec la template principale */
+            color: #2c3e50; /* Couleur de texte modifiée */
+        }
+
+        header {
+            background-color: #2c3e50; /* Couleur d'en-tête alignée avec la template principale */
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        .menu {
+            width: 200px;
+            background-color: #ecf0f1; /* Couleur de fond du menu alignée */
+            padding: 1rem;
+        }
+
+        .menu h2 {
+            font-size: 18px;
+            color: #2c3e50; /* Couleur de titre alignée */
+            margin-bottom: 1rem;
+        }
+
+        .menu a {
+            display: block;
+            margin: 0.5rem 0;
+            color: #2980b9; /* Couleur de lien alignée */
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+            background-color: #ffffff; /* Couleur de fond du contenu principal */
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 1rem;
+        }
+
+        main form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        main form label {
+            color: #2c3e50; /* Couleur de texte des étiquettes alignée */
+            font-size: 14px;
+        }
+
+        main form input {
+            padding: 10px; /* Augmentation du padding pour un meilleur confort */
+            border: 1px solid #bdc3c7; /* Couleur de bordure modifiée */
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        main form button {
+            grid-column: 1 / -1;
+            padding: 10px;
+            background-color: #2980b9; /* Couleur du bouton alignée */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        main form button:hover {
+            background-color: #3498db; /* Couleur du bouton au survol alignée */
+        }
+
+        .back-link {
+            margin-top: 1rem;
+            display: inline-block;
+            color: #2980b9; /* Couleur du lien retour alignée */
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #2c3e50; /* Couleur de fond du pied de page alignée */
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer a {
+            color: #3498db; /* Couleur des liens dans le pied de page alignée */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -14,22 +143,48 @@
     <div class="container">
         <nav class="menu">
             <h2>Menu</h2>
-            <a href="{{ url_for('index') }}">Acceuil</a>
+            <a href="{{ url_for('index') }}">Accueil</a>
             <a href="{{ url_for('add_contact') }}">Ajouter un Contact</a>
             <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
-            <a href="{{ url_for('generate_bill') }}">Générer un Projet de Loi</a>
+            <a href="{{ url_for('generate_bill') }}">Projet de Loi</a>
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
         </nav>
 
         <main>
             <form method="POST">
+                <label for="identifiant">Identifiant :</label>
+                <input type="text" id="identifiant" name="identifiant" required>
+
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" required>
+
                 <label for="nom">Nom :</label>
                 <input type="text" id="nom" name="nom" required>
+
+                <label for="region">Région :</label>
+                <input type="text" id="region" name="region" required>
+
+                <label for="departement">Département :</label>
+                <input type="text" id="departement" name="departement" required>
+
+                <label for="circonscription">Numéro de Circonscription :</label>
+                <input type="text" id="circonscription" name="circonscription" required>
+
+                <label for="profession">Profession :</label>
+                <input type="text" id="profession" name="profession" required>
+
+                <label for="groupe_complet">Groupe Politique Complet :</label>
+                <input type="text" id="groupe_complet" name="groupe_complet" required>
+
+                <label for="groupe_abrege">Groupe Politique Abrégé :</label>
+                <input type="text" id="groupe_abrege" name="groupe_abrege" required>
+
                 <label for="email">Email :</label>
                 <input type="email" id="email" name="email" required>
+
                 <button type="submit">Ajouter</button>
             </form>
-            <a href="{{ url_for('index') }}">Retour</a>
+            <a href="{{ url_for('index') }}" class="back-link">Retour</a>
         </main>
     </div>
 

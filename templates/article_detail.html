@@ -160,14 +160,13 @@
             text-decoration: underline;
         }
     </style>
-
-    <title>Dashboard</title>
+    <title>{{ article.title }}</title>
 </head>
 <body>
     <header>
-        <h1>Tableau de Bord</h1>
+        <h1>{{ article.title }}</h1>
     </header>
-
+    
     <div class="container">
         <nav class="menu">
             <h2>Menu</h2>
@@ -178,70 +177,9 @@
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
         </nav>
 
-        <main>
-            <section class="kpi">
-                <h2>Indicateurs Clés</h2>
-                <div class="kpi-cards">
-                    <div class="card">
-                        <h3>Total des Députés</h3>
-                        <p>{{ total_deputes }}</p>
-                    </div>
-                    <div class="card">
-                        <h3>Nombre de Projets de Loi</h3>
-                        <p>{{ total_lois }}</p>
-                    </div>
-                    <div class="card">
-                        <h3>Nombre d'Échanges</h3>
-                        <p>{{ total_echanges }}</p>
-                    </div>
-                    <div class="card">
-                        <h3>Rendez-vous Pris</h3>
-                        <p>{{ total_rdv }}</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="tableau-region">
-                <h2>Répartition des Députés par Région</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Région</th>
-                            <th>Nombre de Députés</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for region, count in deputes_par_region %}
-                        <tr>
-                            <td>{{ region }}</td>
-                            <td>{{ count }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </section>
-
-            <section class="tableau-lois">
-                <h2>Projets de Loi Récents</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Titre du Projet de Loi</th>
-                            <th>Date</th>
-                            <th>Député Proposant</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for loi in lois_recents %}
-                        <tr>
-                            <td>{{ loi[0] }}</td>
-                            <td>{{ loi[1] }}</td>
-                            <td>{{ loi[2] }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </section>
+        <main class="content">
+            <h2>Détails de l'Article</h2>
+            <p>{{ article.content }}</p>
         </main>
     </div>
 
