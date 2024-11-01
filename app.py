@@ -5,7 +5,6 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
-from unidecode import unidecode  # Pour supprimer les accents
 import os
 import pandas as pd
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
@@ -121,7 +120,6 @@ users = {
 # Fonction pour nettoyer les textes et générer les e-mails sans accents ni caractères spéciaux
 def nettoyer_texte(texte):
     if isinstance(texte, str):
-        texte = unidecode(texte)
         texte = texte.replace("�", "é")  # Supprime les accents
         texte = texte.replace("'", " ")   # Remplace les apostrophes par des espaces
         texte = texte.replace("/", "-")    # Remplace les slashes par des tirets
