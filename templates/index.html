@@ -161,16 +161,14 @@
     <div class="container">
         <nav class="menu">
             <h2>Menu</h2>
-            <nav class="menu">
-                <h2>Menu</h2>
-                <a href="{{ url_for('index') }}">Accueil</a>
-                <a href="{{ url_for('add_contact') }}">Ajouter un Contact</a>
-                <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
-                <a href="{{ url_for('generate_bill') }}">Projet de Loi</a>
-                <a href="{{ url_for('dashboard') }}">Dashboard</a>
-                <a href="{{ url_for('send_mail') }}">Messagerie</a>
-            </nav>
+            <a href="{{ url_for('index') }}">Accueil</a>
+            <a href="{{ url_for('add_contact') }}">Ajouter un Contact</a>
+            <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
+            <a href="{{ url_for('generate_bill') }}">Projet de Loi</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('send_email') }}">Messagerie</a>
         </nav>
+
 
         <main class="content">
             <section class="statistics">
@@ -208,26 +206,12 @@
 
             <section id="articles">
                 <h2>Articles</h2>
-                <div class="article-box">
-                    <h3><a href="{{ url_for('article_detail', article_id=1) }}">Article 1: Comprendre la transition énergétique</a></h3>
-                    <p>Un aperçu des enjeux liés à la transition énergétique.</p>
-                </div>
-                <div class="article-box">
-                    <h3><a href="{{ url_for('article_detail', article_id=2) }}">Article 2: Le rôle des législateurs dans la transition énergétique</a></h3>
-                    <p>Comment les législateurs peuvent aider à la transition énergétique.</p>
-                </div>
-                <div class="article-box">
-                    <h3><a href="{{ url_for('article_detail', article_id=3) }}">Article 3: Innovations législatives pour un avenir durable</a></h3>
-                    <p>Des exemples d'innovations législatives pour la durabilité.</p>
-                </div>
-                <div class="article-box">
-                    <h3><a href="{{ url_for('article_detail', article_id=4) }}">Article 4: Les énergies renouvelables et leur impact</a></h3>
-                    <p>Un examen des énergies renouvelables et de leur rôle dans la réduction des émissions de carbone.</p>
-                </div>
-                <div class="article-box">
-                    <h3><a href="{{ url_for('article_detail', article_id=5) }}">Article 5: La législation climatique en Europe</a></h3>
-                    <p>Analyse des récentes initiatives législatives sur le climat en Europe.</p>
-                </div>
+                {% for article_id, article in articles.items() %}
+                    <div class="article-box">
+                        <h3><a href="{{ url_for('article_detail', article_id=article_id) }}">{{ article.title }}</a></h3>
+                        <p>{{ article.content[:200] }}...</p> <!-- Extrait de contenu pour aperçu -->
+                    </div>
+                {% endfor %}
             </section>
         </main>
 
@@ -236,12 +220,12 @@
         </aside>
     </div>
 
-    <footer class="footer">
+    <footer>
         <p>&copy; 2024 Think Tank. Tous droits réservés.</p>
-        <p>Contactez-nous : <a href="mailto:contact@thinktank.com">contact@thinktank.com</a></p>
+        <p>Contactez-nous : <a href="mailto:contact@tesla-mag.com">ccontact@tesla-mag.com</a></p>
         <p>Suivez-nous sur 
-            <a href="https://twitter.com/thinktank">Twitter</a> | 
-            <a href="https://linkedin.com/company/thinktank">LinkedIn</a>
+            <a href="https://twitter.com/MagazineTesla">Twitter</a> | 
+            <a href="https://www.linkedin.com/company/tesla-magazine/">LinkedIn</a>
         </p>
     </footer>
 </body>

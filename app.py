@@ -21,6 +21,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
+
 # Simuler une base de données d'utilisateurs
 users = {}
 
@@ -281,11 +282,15 @@ def login():
             flash('Nom d’utilisateur ou mot de passe incorrect.')
     return render_template('login.html')
 
+from articles import articles
 # Route pour la page d'accueil
 @app.route('/')
 @login_required  # Exige que l'utilisateur soit connecté
 def index():
-    return render_template('index.html')
+    print(articles)  # Log the content of articles
+    return render_template('index.html', articles=articles)
+
+
 
 # Route pour la déconnexion
 @app.route('/logout')
@@ -316,14 +321,18 @@ def view_contacts():
     deputes = get_deputes()
     return render_template('view_contacts.html', deputes=deputes)
 
+
+from lois import lois
+
 @app.route('/generate_bill', methods=['GET', 'POST'])
 @login_required 
 def generate_bill():
     if request.method == 'POST':
         theme = request.form['theme']
         projet_de_loi = generer_projet_de_loi(theme)
-        return render_template('generate_bill.html', projet_de_loi=projet_de_loi, theme=theme)
-    return render_template('generate_bill.html')
+        return render_template('generate_bill.html', projet_de_loi=projet_de_loi, theme=theme,  lois=lois)
+    return render_template('generate_bill.html', lois=lois)
+
 
 @app.route('/depute_detail/<string:depute_id>')  # Utilisez string pour correspondre à l'identifiant
 @login_required 
@@ -461,28 +470,28 @@ def dashboard():
                            lois_recents=lois_recents)
 @app.route('/article/<int:article_id>')
 def article_detail(article_id):
-    # Exemple de données d'articles, cela peut être remplacé par une base de données
-    articles = {
-        1: {
-            'title': "Comprendre la transition énergétique",
-            'content': "Cet article explique les enjeux de la transition énergétique, ses objectifs, et les politiques à adopter pour y parvenir."
-        },
-        2: {
-            'title': "Le rôle des législateurs dans la transition énergétique",
-            'content': "Dans cet article, nous examinons comment les législateurs peuvent influencer et faciliter la transition énergétique."
-        },
-        3: {
-            'title': "Innovations législatives pour un avenir durable",
-            'content': "Cet article présente des exemples d'innovations législatives qui favorisent la durabilité et l'environnement."
-        }
-    }
-    
+    # Accès aux données de l'article par l'identifiant
     article = articles.get(article_id)
+
     if article:
+        # Ajouter l'ID de l'article au dictionnaire de l'article pour l'utiliser dans le template
+        article['id'] = article_id
         return render_template('article_detail.html', article=article)
     else:
         return "Article non trouvé", 404
     
+
+@app.route('/loi/<int:loi_id>')
+def loi_detail(loi_id):
+    # Accès aux données de l'article par l'identifiant
+    loi = lois.get(loi_id)
+
+    if loi:
+        # Ajouter l'ID de l'article au dictionnaire de l'article pour l'utiliser dans le template
+        loi['id'] = loi_id
+        return render_template('loi_detail.html', loi=loi)
+    else:
+        return "Article non trouvé", 404
 
 # Initialisation de la base de données et importation des données
 create_table()

@@ -180,7 +180,7 @@
             <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
             <a href="{{ url_for('generate_bill') }}">Projet de Loi</a>
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
-            <a href="{{ url_for('send_mail') }}">Messagerie</a>
+            <a href="{{ url_for('send_email') }}">Messagerie</a>
         </nav>
 
         <main>
@@ -203,24 +203,17 @@
             </section>
 
             <section id="lois">
-                <h2>Textes de Loi</h2>
-                <p>Voici quelques textes de lois importants sur la transition énergétique et la législation :</p>
-                
-                <div class="loi-box">
-                    <h3><a href="https://www.exemple.com/loi1">Loi n°1 : Loi sur la Transition Énergétique pour la Croissance Verte</a></h3>
-                    <p>Cette loi vise à réduire les émissions de gaz à effet de serre et à promouvoir les énergies renouvelables, fixant des objectifs ambitieux pour la France en matière de durabilité.</p>
-                </div>
-                
-                <div class="loi-box">
-                    <h3><a href="https://www.exemple.com/loi2">Loi n°2 : Loi relative à la lutte contre le gaspillage et à l'économie circulaire</a></h3>
-                    <p>Cette loi encourage une économie circulaire en visant à réduire les déchets et à améliorer le recyclage, incluant des mesures pour une gestion durable des ressources.</p>
-                </div>
-                
-                <div class="loi-box">
-                    <h3><a href="https://www.exemple.com/loi3">Loi n°3 : Loi sur l'Énergie et le Climat</a></h3>
-                    <p>Une loi adoptée pour répondre aux urgences climatiques et écologiques, fixant des objectifs de neutralité carbone et renforçant les actions contre le réchauffement climatique.</p>
-                </div>
+                <h2>lois</h2>
+                {% for loi_id, loi in lois.items() %}
+                    <div class="loi-box">
+                        <h3><a href="{{ url_for('loi_detail', loi_id=loi_id) }}">{{ loi.title }}</a></h3>
+                        <p>{{ loi.content[:200] }}...</p> <!-- Extrait de contenu pour aperçu -->
+                    </div>
+                {% endfor %}
             </section>
+        </div>
+            </main>
+            
         </main>
 
         <aside class="contacts">
@@ -230,10 +223,10 @@
 
     <footer>
         <p>&copy; 2024 Think Tank. Tous droits réservés.</p>
-        <p>Contactez-nous : <a href="mailto:contact@thinktank.com">contact@thinktank.com</a></p>
+        <p>Contactez-nous : <a href="mailto:contact@tesla-mag.com">ccontact@tesla-mag.com</a></p>
         <p>Suivez-nous sur 
-            <a href="https://twitter.com/thinktank">Twitter</a> | 
-            <a href="https://linkedin.com/company/thinktank">LinkedIn</a>
+            <a href="https://twitter.com/MagazineTesla">Twitter</a> | 
+            <a href="https://www.linkedin.com/company/tesla-magazine/">LinkedIn</a>
         </p>
     </footer>
 </body>

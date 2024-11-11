@@ -175,21 +175,57 @@
             <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
             <a href="{{ url_for('generate_bill') }}">Projet de Loi</a>
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
-            <a href="{{ url_for('send_mail') }}">Messagerie</a>
+            <a href="{{ url_for('send_email') }}">Messagerie</a>
         </nav>
 
+
         <main class="content">
-            <h2>Détails de l'Article</h2>
-            <p>{{ article.content }}</p>
+           
+            <br></br>
+            <div class="article-content">
+                <p>{{ article.content }}</p>
+            </div>
         </main>
+        
+        <style>
+            /* Pour centrer le contenu dans la page */
+            .content {
+                max-width: 1200px; /* Limite la largeur pour que ce soit plus lisible */
+                margin: 0 auto; /* Centre le contenu */
+                padding: 20px;
+                background-color: #f9f9f9; /* Arrière-plan léger pour plus de contraste */
+                border-radius: 8px;
+            }
+        
+            /* Style pour le titre */
+            .content h2 {
+                font-size: 2em;
+                margin-bottom: 20px;
+                color: #333; /* Couleur sombre pour le titre */
+                text-align: center;
+            }
+        
+            /* Style pour le contenu de l'article */
+            .article-content {
+                font-size: 1.2em; /* Augmente la taille de la police */
+                line-height: 1.6em; /* Espace entre les lignes */
+                color: #555; /* Couleur grise pour faciliter la lecture */
+            }
+        
+            /* Espace entre paragraphes */
+            .article-content p {
+                margin-bottom: 1.2em;
+            }
+        </style>
+        
     </div>
 
     <footer>
         <p>&copy; 2024 Think Tank. Tous droits réservés.</p>
-        <p>Contactez-nous : <a href="mailto:contact@thinktank.com">contact@thinktank.com</a></p>
+        <p>Contactez-nous : <a href="mailto:contact@tesla-mag.com">ccontact@tesla-mag.com</a></p>
         <p>Suivez-nous sur 
-            <a href="https://twitter.com/thinktank">Twitter</a> | 
-            <a href="https://linkedin.com/company/thinktank">LinkedIn</a>
+            <a href="https://twitter.com/MagazineTesla">Twitter</a> | 
+            <a href="https://www.linkedin.com/company/tesla-magazine/">LinkedIn</a>
         </p>
     </footer>
 </body>

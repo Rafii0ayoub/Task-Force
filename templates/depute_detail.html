@@ -3,7 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Global reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Background and layout styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #e8ecef; /* Light grey-blue background */
+            color: #34495e; /* Dark grey-blue text */
+        }
+
+        header {
+            background-color: #34495e; /* Dark grey-blue header */
+            color: #ffffff;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            padding: 1.5rem;
+            gap: 1.5rem;
+        }
+
+        /* Menu styling */
+        .menu {
+            width: 220px;
+            background-color: #f7f9fb; /* Soft white background */
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu h2 {
+            font-size: 20px;
+            color: #34495e;
+            margin-bottom: 1.2rem;
+        }
+
+        .menu a {
+            display: block;
+            margin: 0.8rem 0;
+            color: #1abc9c; /* Soft teal color for links */
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.4rem 0;
+        }
+
+        .menu a:hover {
+            background-color: #eaf7f3; /* Light teal hover */
+            border-radius: 4px;
+        }
+
+        /* Main content styling */
+        main {
+            flex: 1;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Statistics section */
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .stat {
+            background-color: #f7f9fb;
+            padding: 1.2rem;
+            border-radius: 6px;
+            text-align: center;
+            flex: 1;
+            color: #34495e;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #dcdde1;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1abc9c; /* Teal header */
+            color: #ffffff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f7f9fb;
+        }
+
+        tbody tr:hover {
+            background-color: #dcdde1; /* Soft grey hover */
+        }
+
+        /* Styling for links in table */
+        table a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        table a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer styling */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #34495e;
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
     <title>Détails du Député</title>
 </head>
 <body>
@@ -20,7 +170,7 @@
             <a href="{{ url_for('view_contacts') }}">Voir les Contacts</a>
             <a href="{{ url_for('generate_bill') }}">Projet de Loi</a>
             <a href="{{ url_for('dashboard') }}">Dashboard</a>
-            <a href="{{ url_for('send_mail') }}">Messagerie</a>
+            <a href="{{ url_for('send_email') }}">Messagerie</a>
         </nav>
 
         <!-- Main Content -->
@@ -61,6 +211,11 @@
 
     <footer>
         <p>&copy; 2024 Think Tank. Tous droits réservés.</p>
+        <p>Contactez-nous : <a href="mailto:contact@tesla-mag.com">ccontact@tesla-mag.com</a></p>
+        <p>Suivez-nous sur 
+            <a href="https://twitter.com/MagazineTesla">Twitter</a> | 
+            <a href="https://www.linkedin.com/company/tesla-magazine/">LinkedIn</a>
+        </p>
     </footer>
 </body>
 </html>
